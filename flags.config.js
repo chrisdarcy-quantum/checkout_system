@@ -34,14 +34,6 @@ module.exports = {
       usedIn: ['server.js'],
     },
     {
-      key: 'use-new-api-endpoint',
-      name: 'Use New API Endpoint',
-      description: 'Switches to the new API endpoint implementation',
-      type: 'boolean',
-      defaultValue: false,
-      usedIn: ['server.js'],
-    },
-    {
       key: 'enable-search-filter',
       name: 'Enable Search Filter',
       description: 'Adds advanced search and filtering capabilities',
