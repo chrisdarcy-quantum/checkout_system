@@ -12,7 +12,6 @@ This application includes 10 feature flags controlling different aspects of the 
 - **enable-dark-mode** - Toggles dark/light theme
 - **show-new-header** - Shows redesigned header vs old one
 - **enable-premium-features** - Unlocks premium UI elements (badges, special styling)
-- **show-promotional-banner** - Displays marketing content banner
 
 ### Functional Flags
 - **enable-user-analytics** - Tracks user behavior and logs analytics events
@@ -44,7 +43,6 @@ Create the following boolean flags in your LaunchDarkly project:
 - `enable-dark-mode`
 - `show-new-header`
 - `enable-premium-features`
-- `show-promotional-banner`
 - `enable-user-analytics`
 - `enable-search-filter`
 - `use-new-api-endpoint`

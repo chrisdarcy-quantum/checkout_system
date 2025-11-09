@@ -2,7 +2,6 @@ let flags = {
     enableDarkMode: false,
     showNewHeader: false,
     enablePremiumFeatures: false,
-    showPromotionalBanner: false,
     enableSearchFilter: false,
 };
 
@@ -10,7 +9,6 @@ let flags = {
 async function init() {
     await loadFlags();
     renderHeader();
-    renderPromotionalBanner();
     renderSearchBox();
     await loadPosts();
 }
@@ -75,19 +73,6 @@ function renderHeader() {
     }
 }
 
-function renderPromotionalBanner() {
-    const bannerDiv = document.getElementById('promotional-banner');
-    
-    if (flags.showPromotionalBanner) {
-        bannerDiv.innerHTML = `
-            <div class="promotional-banner">
-                📚 New Research: Explore the latest papers on production ML systems and experimentation
-            </div>
-        `;
-    } else {
-        bannerDiv.innerHTML = '';
-    }
-}
 
 function renderSearchBox() {
     const searchContainer = document.getElementById('search-container');

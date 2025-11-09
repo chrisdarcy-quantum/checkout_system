@@ -150,7 +150,6 @@ app.get('/api/flags', async (req, res) => {
     enableDarkMode: await ldClient.variation('enable-dark-mode', user, false),
     showNewHeader: await ldClient.variation('show-new-header', user, false),
     enablePremiumFeatures: await ldClient.variation('enable-premium-features', user, false),
-    showPromotionalBanner: await ldClient.variation('show-promotional-banner', user, false),
   };
   
   res.json(flags);
