@@ -2,14 +2,6 @@
 module.exports = {
   flags: [
     {
-      key: 'enable-dark-mode',
-      name: 'Enable Dark Mode',
-      description: 'Toggles dark mode theme for the application',
-      type: 'boolean',
-      defaultValue: false,
-      usedIn: ['public/app.js', 'server.js'],
-    },
-    {
       key: 'show-new-header',
       name: 'Show New Header',
       description: 'Displays the redesigned header with enhanced styling',

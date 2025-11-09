@@ -6,10 +6,9 @@ This is a demo application showcasing LaunchDarkly feature flag integration. It 
 
 ## Features
 
-This application includes 10 feature flags controlling different aspects of the system:
+This application includes 9 feature flags controlling different aspects of the system:
 
 ### UI/Visual Flags
-- **enable-dark-mode** - Toggles dark/light theme
 - **show-new-header** - Shows redesigned header vs old one
 - **enable-premium-features** - Unlocks premium UI elements (badges, special styling)
 - **show-promotional-banner** - Displays marketing content banner
@@ -42,7 +41,6 @@ This application includes 10 feature flags controlling different aspects of the 
 
 Create the following boolean flags in your LaunchDarkly project:
 
-- `enable-dark-mode`
 - `show-new-header`
 - `enable-premium-features`
 - `show-promotional-banner`
@@ -135,8 +133,8 @@ if (useNewQuery) {
 
 ### In Frontend (app.js)
 ```javascript
-if (flags.enableDarkMode) {
-  document.body.classList.add('dark-mode');
+if (flags.showNewHeader) {
+  // Render new header design
 }
 ```
 
