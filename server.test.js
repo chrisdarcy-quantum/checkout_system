@@ -91,7 +91,6 @@ describe('Checkout System API with Feature Flags', () => {
         'enable-dark-mode': true,
         'show-new-header': false,
         'enable-premium-features': true,
-        'show-promotional-banner': false,
       };
       return Promise.resolve(flags[key] !== undefined ? flags[key] : defaultValue);
     });
@@ -103,6 +102,5 @@ describe('Checkout System API with Feature Flags', () => {
     expect(response.body).toHaveProperty('enableDarkMode');
     expect(response.body).toHaveProperty('showNewHeader');
     expect(response.body).toHaveProperty('enablePremiumFeatures');
-    expect(response.body).toHaveProperty('showPromotionalBanner');
   });
 });

@@ -50,14 +50,6 @@ module.exports = {
       usedIn: ['server.js', 'database.js', 'public/app.js'],
     },
     {
-      key: 'show-promotional-banner',
-      name: 'Show Promotional Banner',
-      description: 'Displays marketing and promotional content',
-      type: 'boolean',
-      defaultValue: false,
-      usedIn: ['public/app.js', 'server.js'],
-    },
-    {
       key: 'use-new-database-query',
       name: 'Use New Database Query',
       description: 'Switches to optimized database query implementation',
