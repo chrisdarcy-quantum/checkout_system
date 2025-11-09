@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const LaunchDarkly = require('launchdarkly-node-server-sdk');
 require('dotenv').config();
 
@@ -8,6 +9,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+
+app.use('/vendor', express.static(path.join(__dirname, 'node_modules/launchdarkly-js-client-sdk/dist')));
+
 app.use(express.static('public'));
 
 const ldClient = LaunchDarkly.init(process.env.LAUNCHDARKLY_SDK_KEY);

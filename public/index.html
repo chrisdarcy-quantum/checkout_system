@@ -183,21 +183,32 @@
         <div class="products-grid" id="products"></div>
     </div>
 
-    <!-- LaunchDarkly Client-Side SDK -->
     <script src="https://unpkg.com/launchdarkly-js-client-sdk@3"></script>
     <script>
-        // Initialize LaunchDarkly client-side SDK for dashboard visibility
-        // This is separate from the server-side SDK and only used to show "SDK active" in the dashboard
         const ldClientSideId = '6910d3c6c5b3d809b2a7737e';
+        console.log('Initializing LaunchDarkly client-side SDK with ID:', ldClientSideId);
+        
         const ldClient = LDClient.initialize(ldClientSideId, {
             kind: 'user',
             key: 'demo-user'
         });
         
         ldClient.on('ready', function() {
-            console.log('LaunchDarkly client-side SDK initialized');
-            // Send a track event so LaunchDarkly dashboard shows SDK as active
-            ldClient.track('page-view');
+            console.log('✅ LaunchDarkly client-side SDK initialized successfully');
+            ldClient.track('690f87148bd05a0a0d6c416b');
+            ldClient.flush().then(function() {
+                console.log('✅ Track event sent and flushed to LaunchDarkly');
+            }).catch(function(err) {
+                console.error('❌ Error flushing track event:', err);
+            });
+        });
+        
+        ldClient.on('error', function(err) {
+            console.error('❌ LaunchDarkly client-side SDK error:', err);
+        });
+        
+        ldClient.on('failed', function(err) {
+            console.error('❌ LaunchDarkly client-side SDK failed:', err);
         });
     </script>
     
