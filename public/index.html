@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechHub - Premium Tech Accessories</title>
+    <title>TechHub Labs - ML Systems Research</title>
     <style>
         * {
             margin: 0;
@@ -142,108 +142,153 @@
             box-shadow: 0 0 0 3px rgba(160, 174, 255, 0.1);
         }
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+        .posts-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
             margin-top: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .product-card {
+        .post-card {
             background: white;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             transition: all 0.3s;
-            cursor: pointer;
             position: relative;
-            overflow: hidden;
+            border-left: 4px solid #667eea;
         }
 
-        body.dark-mode .product-card {
+        body.dark-mode .post-card {
             background: #2d3139;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border-left-color: #a0aeff;
         }
 
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        .post-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
         }
 
-        body.dark-mode .product-card:hover {
+        body.dark-mode .post-card:hover {
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         }
 
         .premium-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            color: #333;
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             padding: 6px 12px;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
-        }
-
-        .product-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .product-name {
-            font-size: 20px;
+            font-size: 11px;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .post-title {
+            font-size: 20px;
+            font-weight: 700;
             margin-bottom: 10px;
             color: #212529;
-            min-height: 50px;
+            line-height: 1.4;
+            padding-right: 80px;
         }
 
-        body.dark-mode .product-name {
+        body.dark-mode .post-title {
             color: #e9ecef;
         }
 
-        .product-description {
+        .post-meta {
             font-size: 14px;
             color: #6c757d;
-            margin-bottom: 15px;
-            line-height: 1.5;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
         }
 
-        body.dark-mode .product-description {
+        body.dark-mode .post-meta {
             color: #adb5bd;
         }
 
-        .product-price {
-            font-size: 28px;
-            color: #667eea;
-            font-weight: bold;
-            margin-bottom: 15px;
+        .post-author {
+            font-weight: 600;
         }
 
-        body.dark-mode .product-price {
+        .post-venue {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        body.dark-mode .post-venue {
             color: #a0aeff;
         }
 
-        .add-to-cart-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
+        .post-category {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
+            color: #667eea;
         }
 
-        .add-to-cart-btn:hover {
+        body.dark-mode .post-category {
+            background: rgba(160, 174, 255, 0.15);
+            color: #a0aeff;
+        }
+
+        .post-summary {
+            font-size: 15px;
+            color: #495057;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .post-summary {
+            color: #adb5bd;
+        }
+
+        .post-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .post-link {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .post-link:hover {
+            background: #5a4fcf;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .post-link.arxiv {
+            background: #b31b1b;
+        }
+
+        .post-link.arxiv:hover {
+            background: #8b1515;
+            box-shadow: 0 4px 12px rgba(179, 27, 27, 0.4);
         }
 
         .footer {
@@ -295,9 +340,19 @@
                 font-size: 28px;
             }
 
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            .posts-grid {
                 gap: 20px;
+            }
+            
+            .post-title {
+                font-size: 18px;
+                padding-right: 60px;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
             }
         }
     </style>
@@ -308,12 +363,12 @@
     <div class="container">
         <div id="promotional-banner"></div>
         
-        <h1 class="page-title">Premium Tech Accessories</h1>
-        <p class="page-subtitle">Elevate your workspace with our curated collection</p>
+        <h1 class="page-title">ML Systems Research</h1>
+        <p class="page-subtitle">Curated papers on production ML, experimentation, and systems</p>
 
         <div class="search-container" id="search-container"></div>
         
-        <div class="products-grid" id="products"></div>
+        <div class="posts-grid" id="posts"></div>
     </div>
 
     <footer class="footer">
