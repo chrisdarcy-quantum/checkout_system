@@ -6,6 +6,14 @@ let flags = {
     enableSearchFilter: false,
 };
 
+const productIcons = {
+    'audio': '🎧',
+    'accessories': '🔌',
+    'peripherals': '⌨️',
+    'video': '📹',
+    'default': '💻'
+};
+
 async function init() {
     await loadFlags();
     renderHeader();
@@ -18,7 +26,6 @@ async function loadFlags() {
     try {
         const response = await fetch('http://localhost:3000/api/flags?userId=demo-user');
         flags = await response.json();
-        updateFlagStatus();
         applyFlags();
     } catch (error) {
         console.error('Error loading flags:', error);
@@ -41,14 +48,35 @@ function renderHeader() {
     if (flags.showNewHeader) {
         headerDiv.innerHTML = `
             <div class="header-new">
-                <h1>🛒 Checkout System v2.0</h1>
-                <p>Experience our new and improved interface!</p>
+                <div class="header-content">
+                    <div class="logo">
+                        <span>⚡</span>
+                        <span>TechHub</span>
+                    </div>
+                    <nav class="nav-links">
+                        <a href="#">Products</a>
+                        <a href="#">Deals</a>
+                        <a href="#">Support</a>
+                        <a href="#">🛒 Cart</a>
+                    </nav>
+                </div>
             </div>
         `;
     } else {
         headerDiv.innerHTML = `
-            <div class="header-old">
-                <h1>Checkout System</h1>
+            <div class="header">
+                <div class="header-content">
+                    <div class="logo">
+                        <span>💻</span>
+                        <span>TechHub</span>
+                    </div>
+                    <nav class="nav-links">
+                        <a href="#">Products</a>
+                        <a href="#">Deals</a>
+                        <a href="#">Support</a>
+                        <a href="#">🛒 Cart</a>
+                    </nav>
+                </div>
             </div>
         `;
     }
@@ -60,7 +88,7 @@ function renderPromotionalBanner() {
     if (flags.showPromotionalBanner) {
         bannerDiv.innerHTML = `
             <div class="promotional-banner">
-                🎉 Special Offer: Get 20% off on all premium products! Limited time only!
+                🎉 Holiday Sale: Get 20% off on all premium products! Use code TECH20 at checkout
             </div>
         `;
     } else {
@@ -76,7 +104,7 @@ function renderSearchBox() {
             <input 
                 type="text" 
                 class="search-input" 
-                placeholder="🔍 Search products..." 
+                placeholder="Search for products..." 
                 onkeyup="handleSearch(event)"
             />
         `;
@@ -117,39 +145,20 @@ function renderProducts(products) {
     
     productsDiv.innerHTML = products.map(product => {
         const showPremiumBadge = flags.enablePremiumFeatures && product.premium;
+        const icon = productIcons[product.category] || productIcons['default'];
+        const description = product.description || '';
         
         return `
             <div class="product-card">
-                ${showPremiumBadge ? '<span class="premium-badge">⭐ PREMIUM</span>' : ''}
+                ${showPremiumBadge ? '<span class="premium-badge">Premium</span>' : ''}
+                <span class="product-icon">${icon}</span>
                 <div class="product-name">${product.name}</div>
+                ${description ? `<div class="product-description">${description}</div>` : ''}
                 <div class="product-price">$${product.price.toFixed(2)}</div>
+                <button class="add-to-cart-btn">Add to Cart</button>
             </div>
         `;
     }).join('');
-}
-
-function toggleDarkMode() {
-    flags.enableDarkMode = !flags.enableDarkMode;
-    applyFlags();
-    updateFlagStatus();
-}
-
-function toggleHeader() {
-    flags.showNewHeader = !flags.showNewHeader;
-    renderHeader();
-    updateFlagStatus();
-}
-
-function updateFlagStatus() {
-    const statusDiv = document.getElementById('flag-status');
-    statusDiv.innerHTML = `
-        <strong>Active Flags:</strong><br>
-        Dark Mode: ${flags.enableDarkMode ? '✅' : '❌'} |
-        New Header: ${flags.showNewHeader ? '✅' : '❌'} |
-        Premium Features: ${flags.enablePremiumFeatures ? '✅' : '❌'} |
-        Promotional Banner: ${flags.showPromotionalBanner ? '✅' : '❌'} |
-        Search Filter: ${flags.enableSearchFilter ? '✅' : '❌'}
-    `;
 }
 
 window.addEventListener('DOMContentLoaded', init);

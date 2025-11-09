@@ -42,14 +42,19 @@ app.get('/api/products', async (req, res) => {
   let products;
   if (useNewEndpoint) {
     products = [
-      { id: 1, name: 'Premium Widget', price: 99.99, premium: true },
-      { id: 2, name: 'Standard Widget', price: 49.99, premium: false },
-      { id: 3, name: 'Deluxe Widget', price: 149.99, premium: true },
+      { id: 1, name: 'Wireless Noise-Cancelling Headphones', price: 299.99, premium: true, category: 'audio', description: 'Premium over-ear headphones with active noise cancellation' },
+      { id: 2, name: 'USB-C Fast Charging Cable', price: 24.99, premium: false, category: 'accessories', description: 'Durable braided cable with fast charging support' },
+      { id: 3, name: 'Mechanical Gaming Keyboard', price: 159.99, premium: true, category: 'peripherals', description: 'RGB backlit keyboard with Cherry MX switches' },
+      { id: 4, name: 'Wireless Mouse', price: 49.99, premium: false, category: 'peripherals', description: 'Ergonomic wireless mouse with precision tracking' },
+      { id: 5, name: '4K Webcam', price: 129.99, premium: true, category: 'video', description: 'Professional webcam with auto-focus and HDR' },
+      { id: 6, name: 'Laptop Stand', price: 39.99, premium: false, category: 'accessories', description: 'Adjustable aluminum laptop stand' },
     ];
   } else {
     products = [
-      { id: 1, name: 'Widget A', price: 99.99 },
-      { id: 2, name: 'Widget B', price: 49.99 },
+      { id: 1, name: 'Wireless Noise-Cancelling Headphones', price: 299.99, category: 'audio', description: 'Premium over-ear headphones with active noise cancellation' },
+      { id: 2, name: 'USB-C Fast Charging Cable', price: 24.99, category: 'accessories', description: 'Durable braided cable with fast charging support' },
+      { id: 3, name: 'Mechanical Gaming Keyboard', price: 159.99, category: 'peripherals', description: 'RGB backlit keyboard with Cherry MX switches' },
+      { id: 4, name: 'Wireless Mouse', price: 49.99, category: 'peripherals', description: 'Ergonomic wireless mouse with precision tracking' },
     ];
   }
   
@@ -71,9 +76,12 @@ app.get('/api/search', async (req, res) => {
   }
   
   const products = [
-    { id: 1, name: 'Premium Widget', category: 'premium' },
-    { id: 2, name: 'Standard Widget', category: 'standard' },
-    { id: 3, name: 'Deluxe Widget', category: 'premium' },
+    { id: 1, name: 'Wireless Noise-Cancelling Headphones', category: 'audio', price: 299.99 },
+    { id: 2, name: 'USB-C Fast Charging Cable', category: 'accessories', price: 24.99 },
+    { id: 3, name: 'Mechanical Gaming Keyboard', category: 'peripherals', price: 159.99 },
+    { id: 4, name: 'Wireless Mouse', category: 'peripherals', price: 49.99 },
+    { id: 5, name: '4K Webcam', category: 'video', price: 129.99 },
+    { id: 6, name: 'Laptop Stand', category: 'accessories', price: 39.99 },
   ];
   
   const filtered = products.filter(p => 
