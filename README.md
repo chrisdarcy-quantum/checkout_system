@@ -22,7 +22,6 @@ This application includes 10 feature flags controlling different aspects of the 
 - **use-new-api-endpoint** - Switches between API versions (old vs new product data)
 - **enable-caching** - Toggles caching layer for improved performance
 - **use-new-database-query** - Switches database query implementations
-- **enable-rate-limiting** - Applies API rate limits to prevent abuse
 
 ## Prerequisites
 
@@ -52,7 +51,6 @@ Create the following boolean flags in your LaunchDarkly project:
 - `use-new-api-endpoint`
 - `enable-caching`
 - `use-new-database-query`
-- `enable-rate-limiting`
 
 You can set them to `true` or `false` to test different behaviors.
 

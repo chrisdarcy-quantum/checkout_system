@@ -30,24 +30,20 @@ ldClient.on('error', (err) => {
 const rateLimitMiddleware = async (req, res, next) => {
   const user = { key: req.query.userId || 'anonymous' };
   
-  const enableRateLimiting = await ldClient.variation('enable-rate-limiting', user, false);
+  const userKey = user.key;
+  if (!cache[`ratelimit_${userKey}`]) {
+    cache[`ratelimit_${userKey}`] = { count: 0, resetTime: Date.now() + 60000 };
+  }
   
-  if (enableRateLimiting) {
-    const userKey = user.key;
-    if (!cache[`ratelimit_${userKey}`]) {
-      cache[`ratelimit_${userKey}`] = { count: 0, resetTime: Date.now() + 60000 };
-    }
-    
-    const rateLimit = cache[`ratelimit_${userKey}`];
-    if (Date.now() > rateLimit.resetTime) {
-      rateLimit.count = 0;
-      rateLimit.resetTime = Date.now() + 60000;
-    }
-    
-    rateLimit.count++;
-    if (rateLimit.count > 100) {
-      return res.status(429).json({ error: 'Rate limit exceeded' });
-    }
+  const rateLimit = cache[`ratelimit_${userKey}`];
+  if (Date.now() > rateLimit.resetTime) {
+    rateLimit.count = 0;
+    rateLimit.resetTime = Date.now() + 60000;
+  }
+  
+  rateLimit.count++;
+  if (rateLimit.count > 100) {
+    return res.status(429).json({ error: 'Rate limit exceeded' });
   }
   
   next();

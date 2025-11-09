@@ -73,14 +73,6 @@ module.exports = {
       defaultValue: false,
       usedIn: ['database.js'],
     },
-    {
-      key: 'enable-rate-limiting',
-      name: 'Enable Rate Limiting',
-      description: 'Applies API rate limiting to prevent abuse',
-      type: 'boolean',
-      defaultValue: false,
-      usedIn: ['server.js'],
-    },
   ],
   
   getFlag(key) {
