@@ -20,7 +20,6 @@ This application includes 10 feature flags controlling different aspects of the 
 
 ### Backend Flags
 - **use-new-api-endpoint** - Switches between API versions (old vs new product data)
-- **enable-caching** - Toggles caching layer for improved performance
 - **use-new-database-query** - Switches database query implementations
 
 ## Prerequisites
@@ -49,7 +48,6 @@ Create the following boolean flags in your LaunchDarkly project:
 - `enable-user-analytics`
 - `enable-search-filter`
 - `use-new-api-endpoint`
-- `enable-caching`
 - `use-new-database-query`
 
 You can set them to `true` or `false` to test different behaviors.
@@ -115,14 +113,6 @@ checkout_system/
 
 ## Feature Flag Usage Examples
 
-### In Backend (server.js)
-```javascript
-const enableCaching = await ldClient.variation('enable-caching', user, false);
-if (enableCaching && cache.products) {
-  return res.json(cache.products);
-}
-```
-
 ### In Database Module (database.js)
 ```javascript
 const useNewQuery = await ldClient.variation('use-new-database-query', user, false);
@@ -159,7 +149,7 @@ All feature flags are documented in `flags.config.js`, which includes:
 
 ## API Endpoints
 
-- `GET /api/products` - Get products (uses `use-new-api-endpoint`, `enable-caching`)
+- `GET /api/products` - Get products (uses `use-new-api-endpoint`)
 - `GET /api/search?q=query` - Search products (requires `enable-search-filter`)
 - `GET /api/user/:id` - Get user data (uses `enable-user-analytics`)
 - `GET /api/flags` - Get current flag values for frontend

@@ -58,14 +58,6 @@ module.exports = {
       usedIn: ['public/app.js', 'server.js'],
     },
     {
-      key: 'enable-caching',
-      name: 'Enable Caching',
-      description: 'Toggles the caching layer for improved performance',
-      type: 'boolean',
-      defaultValue: false,
-      usedIn: ['server.js'],
-    },
-    {
       key: 'use-new-database-query',
       name: 'Use New Database Query',
       description: 'Switches to optimized database query implementation',
