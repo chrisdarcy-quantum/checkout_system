@@ -183,6 +183,24 @@
         <div class="products-grid" id="products"></div>
     </div>
 
+    <!-- LaunchDarkly Client-Side SDK -->
+    <script src="https://unpkg.com/launchdarkly-js-client-sdk@3"></script>
+    <script>
+        // Initialize LaunchDarkly client-side SDK for dashboard visibility
+        // This is separate from the server-side SDK and only used to show "SDK active" in the dashboard
+        const ldClientSideId = '6910d3c6c5b3d809b2a7737e';
+        const ldClient = LDClient.initialize(ldClientSideId, {
+            kind: 'user',
+            key: 'demo-user'
+        });
+        
+        ldClient.on('ready', function() {
+            console.log('LaunchDarkly client-side SDK initialized');
+            // Send a track event so LaunchDarkly dashboard shows SDK as active
+            ldClient.track('page-view');
+        });
+    </script>
+    
     <script src="app.js"></script>
 </body>
 </html>
