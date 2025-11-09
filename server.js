@@ -60,9 +60,7 @@ app.get('/api/posts', async (req, res) => {
   
   const useNewEndpoint = await ldClient.variation('use-new-api-endpoint', user, false);
   
-  const enableCaching = await ldClient.variation('enable-caching', user, false);
-  
-  if (enableCaching && cache.posts) {
+  if (cache.posts) {
     console.log('Returning cached posts');
     return res.json(cache.posts);
   }
@@ -92,9 +90,7 @@ app.get('/api/posts', async (req, res) => {
     ];
   }
   
-  if (enableCaching) {
-    cache.posts = posts;
-  }
+  cache.posts = posts;
   
   res.json(posts);
 });

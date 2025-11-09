@@ -24,37 +24,19 @@ describe('Checkout System API with Feature Flags', () => {
     jest.clearAllMocks();
   });
 
-  test('GET /api/products returns new endpoint data when use-new-api-endpoint flag is enabled', async () => {
+  test('GET /api/posts returns new endpoint data when use-new-api-endpoint flag is enabled', async () => {
     mockLdClient.variation.mockImplementation((key, user, defaultValue) => {
       if (key === 'use-new-api-endpoint') return Promise.resolve(true);
-      if (key === 'enable-caching') return Promise.resolve(false);
       return Promise.resolve(defaultValue);
     });
 
     const response = await request(app)
-      .get('/api/products?userId=test-user')
+      .get('/api/posts?userId=test-user')
       .expect(200);
 
-    expect(response.body).toHaveLength(3);
+    expect(response.body).toHaveLength(10);
     expect(response.body[0]).toHaveProperty('premium');
     expect(mockLdClient.variation).toHaveBeenCalledWith('use-new-api-endpoint', expect.any(Object), false);
-  });
-
-  test('GET /api/products returns cached data when enable-caching flag is enabled', async () => {
-    mockLdClient.variation.mockImplementation((key, user, defaultValue) => {
-      if (key === 'enable-caching') return Promise.resolve(true);
-      if (key === 'use-new-api-endpoint') return Promise.resolve(false);
-      return Promise.resolve(defaultValue);
-    });
-
-    await request(app).get('/api/products?userId=test-user');
-    
-    const response = await request(app)
-      .get('/api/products?userId=test-user')
-      .expect(200);
-
-    expect(response.body).toBeDefined();
-    expect(mockLdClient.variation).toHaveBeenCalledWith('enable-caching', expect.any(Object), false);
   });
 
   test('GET /api/search returns 403 when enable-search-filter flag is disabled', async () => {
