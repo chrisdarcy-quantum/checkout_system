@@ -1,5 +1,4 @@
 let flags = {
-    enableDarkMode: false,
     showNewHeader: false,
     enablePremiumFeatures: false,
     enableSearchFilter: false,
@@ -24,13 +23,8 @@ async function loadFlags() {
 }
 
 function applyFlags() {
-    if (flags.enableDarkMode) {
-        document.body.classList.remove('light-mode');
-        document.body.classList.add('dark-mode');
-    } else {
-        document.body.classList.remove('dark-mode');
-        document.body.classList.add('light-mode');
-    }
+    document.body.classList.remove('dark-mode');
+    document.body.classList.add('light-mode');
 }
 
 function renderHeader() {

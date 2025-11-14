@@ -88,7 +88,6 @@ describe('Checkout System API with Feature Flags', () => {
   test('GET /api/flags returns all frontend feature flags', async () => {
     mockLdClient.variation.mockImplementation((key, user, defaultValue) => {
       const flags = {
-        'enable-dark-mode': true,
         'show-new-header': false,
         'enable-premium-features': true,
       };
@@ -99,7 +98,6 @@ describe('Checkout System API with Feature Flags', () => {
       .get('/api/flags?userId=test-user')
       .expect(200);
 
-    expect(response.body).toHaveProperty('enableDarkMode');
     expect(response.body).toHaveProperty('showNewHeader');
     expect(response.body).toHaveProperty('enablePremiumFeatures');
   });
